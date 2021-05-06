@@ -1,43 +1,75 @@
-// grid value
-const canvaSize = 8;
+const grid = {
+    gridSize: 8,
+    resetGrid: function () {
+        document.getElementById('invader').innerHTML = '';
+    },
+    generateInput: function () {
+        // select form element
+        const configElement = document.querySelector('.configuration');
 
-//insert table element
-const invaderElement = document.getElementById('invader');
+        // create input type number and ad it to the form
+        const numberElement = document.createElement('input');
+        numberElement.setAttribute('class', 'numberInput');
+        numberElement.setAttribute('type', 'number');
+        // numberElement.setAttribute('value', grid.gridSize);
+        numberElement.setAttribute('min', '4');
+        configElement.appendChild(numberElement);
 
-// Creates grid
-for (i = 0; i < canvaSize; i++) {
-    // debugger;
-    const rowElement = document.createElement('div');
-    rowElement.className = 'rowElement';
 
-    for (j = 0; j < canvaSize; j++) {
-        const cellElement = document.createElement('div');
-        cellElement.className = 'cellElement';
-        rowElement.appendChild(cellElement);
-        cellElement.addEventListener('mouseup', function () {
-            // cellElement.style.backgroundColor = curentColor === 'black' ? 'black' : "white";
-            if (cellElement.style.backgroundColor === "black") {
-                cellElement.style.backgroundColor = "white";
+        const validationElement = document.createElement('button');
+        validationElement.setAttribute('class', 'validationButton');
+        validationElement.setAttribute('value', 'Apply');
+        validationElement.innerHTML = 'Apply';
+        configElement.appendChild(validationElement);
+        validationElement.addEventListener('click', grid.generateGrid);
+
+        configElement.addEventListener('submit', function (event) {
+
+            // // prevent default behavior on form submition
+            // console.log(event.target);
+            event.preventDefault();
+            grid.gridSize = parseInt(numberElement.value);
+        });
+
+    },
+    generateGrid: function () {
+        grid.resetGrid();
+        //insert table element
+        const invaderElement = document.getElementById('invader');
+
+        // Creates grid
+        for (i = 0; i < grid.gridSize; i++) {
+            // debugger;
+            const rowElement = document.createElement('div');
+            rowElement.className = 'rowElement';
+
+            for (j = 0; j < grid.gridSize; j++) {
+                const cellElement = document.createElement('div');
+                cellElement.className = 'cellElement';
+                rowElement.appendChild(cellElement);
+                cellElement.addEventListener('mouseup', grid.handleCellClic
+                )
             }
-            else {
-                cellElement.style.backgroundColor = "black";
-            }
-        })
+            invaderElement.appendChild(rowElement);
+        };
+    },
+    handleCellClic: function (event) {
+        const clickedElement = event.target;
+        if (clickedElement.style.backgroundColor === "black") {
+            clickedElement.style.backgroundColor = "white";
+        }
+        else {
+            clickedElement.style.backgroundColor = "black";
+        }
     }
-    invaderElement.appendChild(rowElement);
-};
-// debugger;
-// select form element
-const configElement = document.querySelector('.configuration');
+}
 
-// create input type number and ad it to the form
-const numberElement = document.createElement('input');
-numberElement.setAttribute('type', 'number');
-numberElement.setAttribute('value', '16');
-numberElement.setAttribute('min', '4');
-configElement.appendChild(numberElement);
 
-const validationElement = document.createElement('input');
-validationElement.setAttribute('type', 'button');
-validationElement.setAttribute('value', 'Apply');
-configElement.appendChild(validationElement);
+
+let init = function () {
+
+    grid.generateInput();
+    grid.generateGrid();
+}
+
+init();
