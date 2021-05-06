@@ -55,12 +55,13 @@ const grid = {
     },
     handleCellClic: function (event) {
         const clickedElement = event.target;
-        if (clickedElement.classList.contains("cell--black")) {
-            clickedElement.classList.remove("cell--black");
-        }
-        else {
-            clickedElement.classList.add("cell--black");
-        }
+        clickedElement.classList.toggle('cell--black');
+        // if (clickedElement.classList.contains("cell--black")) {
+        //     clickedElement.classList.remove("cell--black");
+        // }
+        // else {
+        //     clickedElement.classList.add("cell--black");
+        // }
     }
 }
 
