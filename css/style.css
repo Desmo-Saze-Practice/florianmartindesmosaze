@@ -1,13 +1,36 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#invader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 table {
     background-color: brown;
     border-collapse: collapse;
 
 }
 
-tr, td {
+.cellElement {
     height: 10px;
     width: 10px;
+    border: rgb(250, 121, 0) solid 1px;
+    box-sizing: border-box;
+}
 
+.rowElement {
+    display: flex;
+    flex-direction: column;
+}
+
+.cellElement {
+    background-color: darkred;
 }
 
 td {
