@@ -55,15 +55,14 @@ const grid = {
     },
     handleCellClic: function (event) {
         const clickedElement = event.target;
-        if (clickedElement.style.backgroundColor === "black") {
-            clickedElement.style.backgroundColor = "white";
+        if (clickedElement.classList.contains("cell--black")) {
+            clickedElement.classList.remove("cell--black");
         }
         else {
-            clickedElement.style.backgroundColor = "black";
+            clickedElement.classList.add("cell--black");
         }
     }
 }
-
 
 
 let init = function () {
