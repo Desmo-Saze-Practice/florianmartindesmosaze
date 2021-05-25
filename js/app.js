@@ -69,19 +69,29 @@ const grid = {
         grid.bluevioletElement.addEventListener('click', grid.handlePickerClick);
         grid.blackElement.addEventListener('click', grid.handlePickerClick);
 
+        
         for (i = 0; i < grid.gridSize; i++) {
-            const rowElement = document.createElement('div');
+            let rowElement = document.createElement('div');
             rowElement.className = 'rowElement';
+            
+            grid.invaderElement.appendChild(rowElement);
 
-            for (j = 0; j < grid.gridSize; j++) {
-                const cellElement = document.createElement('div');
+            for (j = 0; j < grid.gridSize; j++) 
+            {
+                // debugger;
+                let cellElement = document.createElement('div');
                 cellElement.className = 'cellElement';
                 cellElement.style.height = grid.pixelSize;
                 cellElement.style.width = grid.pixelSize;
-                rowElement.appendChild(cellElement);
-                cellElement.addEventListener('click', grid.handleCellClic)
+                cellElement.addEventListener('click', grid.handleCellClic);
+                
+                let delay = j * 10 ;
+                setTimeout( function() {
+                    rowElement.appendChild(cellElement)
+
+                }, delay
+                );
             };
-            grid.invaderElement.appendChild(rowElement);
         };
         console.log(grid.redElement);
 
